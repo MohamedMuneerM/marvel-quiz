@@ -1,7 +1,14 @@
 from utils import csvutils
+from configurations.configuration_model import ConfigurationModel
 
-def test():
-    print("Inside Main File")
+configurations = ConfigurationModel()
+
+def home_page():
+    # add to config
+    print("------------------------------")
+    print(configurations.welcome_text)
+
+def prep_and_return_questions() -> dict:
     question_limit = 20
     current_count = 0
     filepath = "src/data/marvel.csv"
@@ -22,7 +29,12 @@ def test():
 
         current_count+=1
     
-    print(questions_with_answers)
+    return questions_with_answers
+
+def test():
+    print("Inside Main File")
+    prep_and_return_questions()
+    home_page()
 
 if __name__ == "__main__":
     # testing code
