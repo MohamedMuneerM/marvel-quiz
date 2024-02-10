@@ -1,18 +1,18 @@
-from utils import csvutils
+from utils import csvutils, consoleutils
 from configurations.configuration_model import ConfigurationModel
 
 configurations = ConfigurationModel()
 
 def home_page():
-    # add to config
     print("------------------------------")
     print(configurations.welcome_text)
 
-def prep_env_and_get_questions() -> dict:
+def prep_env(filepath: str) -> None:
+    csvutils.shuffle_csv(filepath)
+
+def get_questions(filepath: str) -> dict:
     question_limit = 20
     current_count = 0
-    filepath = "src/data/marvel.csv"
-    csvutils.shuffle_csv(filepath)
     questions_with_answers = dict()
     for header, record in csvutils.read_csv(filepath, False):
         print(record)
@@ -32,9 +32,16 @@ def prep_env_and_get_questions() -> dict:
     return questions_with_answers
 
 def test():
-    print("Inside Main File")
-    prep_env_and_get_questions()
-    home_page()
+    try:
+        print(f"Inside Main File {__file__}")
+        filepath = configurations.questions_with_options_file_path
+        prep_env(filepath)
+        get_questions(filepath)
+        home_page()
+        print(consoleutils.get_user_input("hey there", input_type=int))
+
+    except Exception as error:
+        print(error)
 
 if __name__ == "__main__":
     # testing code
