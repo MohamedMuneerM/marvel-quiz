@@ -8,7 +8,7 @@ def home_page():
     print("------------------------------")
     print(configurations.welcome_text)
 
-def prep_and_return_questions() -> dict:
+def prep_env_and_get_questions() -> dict:
     question_limit = 20
     current_count = 0
     filepath = "src/data/marvel.csv"
@@ -33,7 +33,7 @@ def prep_and_return_questions() -> dict:
 
 def test():
     print("Inside Main File")
-    prep_and_return_questions()
+    prep_env_and_get_questions()
     home_page()
 
 if __name__ == "__main__":
