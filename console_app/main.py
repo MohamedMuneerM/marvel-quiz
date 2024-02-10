@@ -15,7 +15,6 @@ def get_questions(filepath: str) -> dict:
     current_count = 0
     questions_with_answers = dict()
     for header, record in csvutils.read_csv(filepath, False):
-        print(record)
         if record == None:
             raise Exception(f"Unexpected error when loading the csv file...")
 
